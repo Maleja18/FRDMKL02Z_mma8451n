@@ -1,11 +1,14 @@
-/*! @file : sdk_hal_i2c0.h
- * @author  Ernesto Andres Rincon Cruz
- * @version 1.0.0
- * @date    11/01/2021
+/*! @file : sdk_hal_i2c0.c
+ * @author  maria alejandra pabon
+ * @version v0.2
+ * @date    28/01/2021
  * @brief   Driver for I2C0
  * @details
  *
- */
+*/
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #ifndef SDK_HAL_I2C0_H_
 #define SDK_HAL_I2C0_H_
 /*******************************************************************************
@@ -25,6 +28,37 @@
 /*******************************************************************************
  * Public Definitions
  ******************************************************************************/
+enum _i2c0_reg_address {
+
+	STATUS_F_STATUS = 0x00,
+	// DIRECCIÓN DE REGISTRO X, Y, Z /
+	OUT_X_MSB,				//8 MSB de muestra de 14 bits
+	OUT_X_LSB,				//6 LSB de muestra de 14 bits
+	OUT_Y_MSB,				//8 MSB de muestra de 14 bits
+	OUT_Y_LSB,				//6 LSB de muestra de 14 bits
+	OUT_Z_MSB,				//8 MSB de muestra de 14 bits
+	OUT_Z_LSB,				//6 LSB de muestra de 14 bits
+	F_SETUP = 0x09,
+	TRIG_CFG,
+	SYSMOD,
+	INT_SOURCE,
+	WHO_AM_I,
+	XYZ_DATA_CFG,
+	HP_FILTER_CUTOFF,
+	ASLP_COUNT,		 		//Configuración del contador para suspensión automática
+	CTRL_REG1,		 		//ODR = 800 Hz, modo de espera.
+	CTRL_REG2,		 		//Habilitación de suspensión, modos OS, RST, ST
+	CTRL_REG3,		 		//Despertar de la suspensión, IPOL, PP_OD
+	CTRL_REG4,		 		//Registro de habilitación de interrupciones
+	CTRL_REG5,		 		//Mapa de pin de interrupción (INT1 / INT2)
+	OFF_X,		 			//ajuste de eje X
+	OFF_Y,		 			//Ajuste de eje Y
+	OFF_Z,		 			//ajuste de eje Z
+
+
+
+
+};
 
 /*******************************************************************************
  * External vars
@@ -64,7 +98,7 @@ status_t i2c0MasterInit(uint32_t baud_rate);
  */
 status_t i2c0MasterReadByte(uint8_t *data, uint8_t device_address, int8_t memory_address);
 
-status_t i2c0MasterWriteByte(uint8_t data, uint8_t deviceAddress);
+status_t i2c0MasterWriteByte(uint8_t device_address, int8_t memory_address, uint8_t data);
 
 
 
